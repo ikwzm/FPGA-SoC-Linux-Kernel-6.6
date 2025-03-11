@@ -1,0 +1,297 @@
+diff --git a/Makefile b/Makefile
+index c84413077..786929561 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2,7 +2,7 @@
+ VERSION = 6
+ PATCHLEVEL = 6
+ SUBLEVEL = 40
+-EXTRAVERSION =
++EXTRAVERSION = -armv7-fpga
+ NAME = Hurr durr I'ma ninja sloth
+ 
+ # *DOCUMENTATION*
+diff --git a/arch/arm/boot/dts/intel/socfpga/socfpga.dtsi b/arch/arm/boot/dts/intel/socfpga/socfpga.dtsi
+index 4c1d140f4..6f5e219d6 100644
+--- a/arch/arm/boot/dts/intel/socfpga/socfpga.dtsi
++++ b/arch/arm/boot/dts/intel/socfpga/socfpga.dtsi
+@@ -87,14 +87,6 @@ pdma: pdma@ffe01000 {
+ 			};
+ 		};
+ 
+-		base_fpga_region {
+-			compatible = "fpga-region";
+-			fpga-mgr = <&fpgamgr0>;
+-
+-			#address-cells = <0x1>;
+-			#size-cells = <0x1>;
+-		};
+-
+ 		can0: can@ffc00000 {
+ 			compatible = "bosch,d_can";
+ 			reg = <0xffc00000 0x1000>;
+@@ -523,23 +515,25 @@ h2f_user2_clk: h2f_user2_clk {
+ 				};
+ 		};
+ 
+-		fpga_bridge0: fpga_bridge@ff400000 {
++		fpga_bridge_lwhps2fpga: fpga_bridge@ff400000 {
+ 			compatible = "altr,socfpga-lwhps2fpga-bridge";
+ 			reg = <0xff400000 0x100000>;
+ 			resets = <&rst LWHPS2FPGA_RESET>;
+ 			clocks = <&l4_main_clk>;
++			bridge-enable = <0>;
+ 			status = "disabled";
+ 		};
+ 
+-		fpga_bridge1: fpga_bridge@ff500000 {
++		fpga_bridge_hps2fpga: fpga_bridge@ff500000 {
+ 			compatible = "altr,socfpga-hps2fpga-bridge";
+ 			reg = <0xff500000 0x10000>;
+ 			resets = <&rst HPS2FPGA_RESET>;
+ 			clocks = <&l4_main_clk>;
++			bridge-enable = <1>;
+ 			status = "disabled";
+ 		};
+ 
+-		fpga_bridge2: fpga-bridge@ff600000 {
++		fpga_bridge_fpga2hps: fpga-bridge@ff600000 {
+ 			compatible = "altr,socfpga-fpga2hps-bridge";
+ 			reg = <0xff600000 0x100000>;
+ 			resets = <&rst FPGA2HPS_RESET>;
+@@ -547,7 +541,7 @@ fpga_bridge2: fpga-bridge@ff600000 {
+ 			status = "disabled";
+ 		};
+ 
+-		fpga_bridge3: fpga-bridge@ffc25080 {
++		fpga_bridge_fpga2sdram: fpga-bridge@ffc25080 {
+ 			compatible = "altr,socfpga-fpga2sdram-bridge";
+ 			reg = <0xffc25080 0x4>;
+ 			status = "disabled";
+@@ -566,6 +560,15 @@ socfpga_axi_setup: stmmac-axi-config {
+ 			snps,blen = <0 0 0 0 16 0 0>;
+ 		};
+ 
++		fpga_region0: fpga-region0 {
++			compatible = "fpga-region";
++			fpga-mgr = <&fpgamgr0>;
++			fpga-bridges = <&fpga_bridge_lwhps2fpga &fpga_bridge_hps2fpga &fpga_bridge_fpga2hps &fpga_bridge_fpga2sdram>;
++			#address-cells = <0x1>;
++			#size-cells = <0x1>;
++			ranges;
++		};
++
+ 		gmac0: ethernet@ff700000 {
+ 			compatible = "altr,socfpga-stmmac", "snps,dwmac-3.70a", "snps,dwmac";
+ 			altr,sysmgr-syscon = <&sysmgr 0x60 0>;
+diff --git a/arch/arm/boot/dts/intel/socfpga/socfpga_cyclone5_de0_nano_soc.dts b/arch/arm/boot/dts/intel/socfpga/socfpga_cyclone5_de0_nano_soc.dts
+index bedf577cb..a7397a486 100644
+--- a/arch/arm/boot/dts/intel/socfpga/socfpga_cyclone5_de0_nano_soc.dts
++++ b/arch/arm/boot/dts/intel/socfpga/socfpga_cyclone5_de0_nano_soc.dts
+@@ -94,8 +94,25 @@ &mmc0 {
+ 
+ &uart0 {
+ 	status = "okay";
++	clock-frequency = <1843200>;
+ };
+ 
+ &usb1 {
+ 	status = "okay";
+ };
++
++&fpga_bridge_lwhps2fpga {
++	status = "okay";
++};
++
++&fpga_bridge_hps2fpga {
++	status = "okay";
++};
++
++&fpga_bridge_fpga2hps {
++	status = "okay";
++};
++
++&fpga_bridge_fpga2sdram {
++	status = "okay";
++};
+diff --git a/arch/arm/boot/dts/xilinx/Makefile b/arch/arm/boot/dts/xilinx/Makefile
+index 9233e539b..58959f8c5 100644
+--- a/arch/arm/boot/dts/xilinx/Makefile
++++ b/arch/arm/boot/dts/xilinx/Makefile
+@@ -13,5 +13,6 @@ dtb-$(CONFIG_ARCH_ZYNQ) += \
+ 	zynq-zed.dtb \
+ 	zynq-zturn.dtb \
+ 	zynq-zturn-v5.dtb \
++	zynq-pynqz1.dtb \
+ 	zynq-zybo.dtb \
+ 	zynq-zybo-z7.dtb
+diff --git a/arch/arm/boot/dts/xilinx/zynq-7000.dtsi b/arch/arm/boot/dts/xilinx/zynq-7000.dtsi
+index a7db3f300..335e2bdf0 100644
+--- a/arch/arm/boot/dts/xilinx/zynq-7000.dtsi
++++ b/arch/arm/boot/dts/xilinx/zynq-7000.dtsi
+@@ -34,14 +34,6 @@ cpu1: cpu@1 {
+ 		};
+ 	};
+ 
+-	fpga_full: fpga-full {
+-		compatible = "fpga-region";
+-		fpga-mgr = <&devcfg>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges;
+-	};
+-
+ 	pmu@f8891000 {
+ 		compatible = "arm,cortex-a9-pmu";
+ 		interrupts = <0 5 4>, <0 6 4>;
+@@ -373,6 +365,14 @@ devcfg: devcfg@f8007000 {
+ 			syscon = <&slcr>;
+ 		};
+ 
++		fpga_region0: fpga-region0 {
++			compatible = "fpga-region";
++			fpga-mgr = <&devcfg>;
++			#address-cells = <1>;
++			#size-cells = <1>;
++			ranges;
++		};
++
+ 		global_timer: timer@f8f00200 {
+ 			compatible = "arm,cortex-a9-global-timer";
+ 			reg = <0xf8f00200 0x20>;
+@@ -536,4 +536,14 @@ ptm1_out_port: endpoint {
+ 			};
+ 		};
+ 	};
++
++	reserved-memory {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges;
++
++		zynq-dma-unusable-area {
++			reg = <0x0 0x80000>;
++		};
++	};
+ };
+diff --git a/arch/arm/boot/dts/xilinx/zynq-pynqz1.dts b/arch/arm/boot/dts/xilinx/zynq-pynqz1.dts
+new file mode 100644
+index 000000000..e8546f86b
+--- /dev/null
++++ b/arch/arm/boot/dts/xilinx/zynq-pynqz1.dts
+@@ -0,0 +1,66 @@
++/*
++ * Digilent PYNQ-Z1 board DTS
++ *
++ *  Copyright (C) 2016 Digilent
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++/dts-v1/;
++#include "zynq-7000.dtsi"
++
++/ {
++	model = "Zynq PYNQ-Z1 Development Board";
++	compatible = "digilent,zynq-pynqz1", "xlnx,zynq-7000";
++
++	aliases {
++		ethernet0 = &gem0;
++		serial0 = &uart0;
++	};
++
++	memory {
++		device_type = "memory";
++		reg = <0x0 0x20000000>;
++	};
++
++	chosen {
++		bootargs = "earlycon";
++		stdout-path = "serial0:115200n8";
++	};
++
++	usb_phy0: phy0 {
++		#phy-cells = <0>;
++		compatible = "usb-nop-xceiv";
++		reset-gpios = <&gpio0 46 1>;
++	};
++};
++
++&clkc {
++	ps-clk-frequency = <50000000>;
++	fclk-enable = <0xf>;
++};
++
++&gem0 {
++	status = "okay";
++	phy-mode = "rgmii-id";
++	phy-handle = <&ethernet_phy>;
++
++	ethernet_phy: ethernet-phy@0 { /* rtl8211e-vl */
++		reg = <1>;
++	};
++};
++
++&sdhci0 {
++	status = "okay";
++};
++
++&uart0 {
++	status = "okay";
++	clock-frequency = <1843200>;
++};
++
++&usb0 {
++	status = "okay";
++	dr_mode = "host";
++	usb-reset = <&gpio0 46 0>;
++	usb-phy = <&usb_phy0>;
++};
+diff --git a/arch/arm/boot/dts/xilinx/zynq-zybo-z7.dts b/arch/arm/boot/dts/xilinx/zynq-zybo-z7.dts
+index 7b87e10d3..518e76849 100644
+--- a/arch/arm/boot/dts/xilinx/zynq-zybo-z7.dts
++++ b/arch/arm/boot/dts/xilinx/zynq-zybo-z7.dts
+@@ -18,7 +18,7 @@ memory@0 {
+ 	};
+ 
+ 	chosen {
+-		bootargs = "";
++		bootargs = "earlycon";
+ 		stdout-path = "serial0:115200n8";
+ 	};
+ 
+@@ -40,6 +40,7 @@ usb_phy0: phy0 {
+ 
+ &clkc {
+ 	ps-clk-frequency = <33333333>;
++	fclk-enable = <0xf>;
+ };
+ 
+ &gem0 {
+@@ -59,6 +60,7 @@ &sdhci0 {
+ 
+ &uart1 {
+ 	status = "okay";
++	clock-frequency = <1843200>;
+ };
+ 
+ &usb0 {
+diff --git a/arch/arm/boot/dts/xilinx/zynq-zybo.dts b/arch/arm/boot/dts/xilinx/zynq-zybo.dts
+index 755f6f109..e01e86485 100644
+--- a/arch/arm/boot/dts/xilinx/zynq-zybo.dts
++++ b/arch/arm/boot/dts/xilinx/zynq-zybo.dts
+@@ -35,6 +35,7 @@ usb_phy0: phy0 {
+ 
+ &clkc {
+ 	ps-clk-frequency = <50000000>;
++	fclk-enable = <0xf>;
+ };
+ 
+ &gem0 {
+@@ -54,6 +55,7 @@ &sdhci0 {
+ 
+ &uart1 {
+ 	status = "okay";
++	clock-frequency = <1843200>;
+ };
+ 
+ &usb0 {

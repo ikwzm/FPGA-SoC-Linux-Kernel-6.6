@@ -1,0 +1,2470 @@
+## =============================================================================
+## General setup
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### System V IPC
+### ----------------------------------------------------------------------------
+CONFIG_SYSVIPC=y
+
+### ----------------------------------------------------------------------------
+### uselib syscall (for libc5 and earlier)
+### ----------------------------------------------------------------------------
+CONFIG_USELIB=y
+
+### ----------------------------------------------------------------------------
+### Timers subsystem
+### ----------------------------------------------------------------------------
+
+#### 
+#### Old Idle dynticks config
+#### 
+CONFIG_NO_HZ=y
+
+#### 
+#### High Resolution Timer Support
+#### 
+CONFIG_HIGH_RES_TIMERS=y
+
+### end of Timers subsystem
+
+### ----------------------------------------------------------------------------
+### Preemption Model
+### ----------------------------------------------------------------------------
+
+#### 
+#### No Forced Preemption (Server)
+#### 
+#### CONFIG_PREEMPT_NONE is not set
+
+#### 
+#### Voluntary Kernel Preemption (Desktop)
+#### 
+#### CONFIG_PREEMPT_VOLUNTARY is not set
+
+#### 
+#### Preemptible Kernel (Low-Latency Desktop)
+#### 
+CONFIG_PREEMPT=y
+
+#### 
+#### Fully Preemptible Kernel (Real-Time)
+#### 
+#### 
+
+### end of Preemption Model
+
+### ----------------------------------------------------------------------------
+### Kernel .config support
+### ----------------------------------------------------------------------------
+CONFIG_IKCONFIG=y
+
+#### 
+#### Enable access to .config through /proc/config.gz
+#### 
+CONFIG_IKCONFIG_PROC=y
+
+### ----------------------------------------------------------------------------
+### Kernel log buffer size (16 => 64KB, 17 => 128KB)
+### ----------------------------------------------------------------------------
+CONFIG_LOG_BUF_SHIFT=14
+
+### ----------------------------------------------------------------------------
+### Control Group support
+### ----------------------------------------------------------------------------
+CONFIG_CGROUPS=y
+
+#### 
+#### Cpuset controller
+#### 
+CONFIG_CPUSETS=y
+
+### end of Control Group support
+
+### ----------------------------------------------------------------------------
+### Namespaces support
+### ----------------------------------------------------------------------------
+CONFIG_NAMESPACES=y
+
+### end of Namespaces support
+
+### ----------------------------------------------------------------------------
+### Initial RAM filesystem and RAM disk (initramfs/initrd) support
+### ----------------------------------------------------------------------------
+CONFIG_BLK_DEV_INITRD=y
+
+### ----------------------------------------------------------------------------
+### Compiler optimization level
+### ----------------------------------------------------------------------------
+
+#### 
+#### Optimize for performance (-O2)
+#### 
+#### CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE is not set
+
+#### 
+#### Optimize for size (-Os)
+#### 
+CONFIG_CC_OPTIMIZE_FOR_SIZE=y
+
+### end of Compiler optimization level
+
+### ----------------------------------------------------------------------------
+### Configure standard kernel features (expert users)
+### ----------------------------------------------------------------------------
+CONFIG_EXPERT=y
+
+### end of Configure standard kernel features (expert users)
+
+### ----------------------------------------------------------------------------
+### Profiling support
+### ----------------------------------------------------------------------------
+CONFIG_PROFILING=y
+
+## end of General setup
+
+## =============================================================================
+## System Type
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### Altera SOCFPGA family
+### ----------------------------------------------------------------------------
+CONFIG_ARCH_INTEL_SOCFPGA=y
+
+### end of Altera SOCFPGA family
+
+### ----------------------------------------------------------------------------
+### ARM Ltd. Versatile Express family
+### ----------------------------------------------------------------------------
+CONFIG_ARCH_VEXPRESS=y
+
+### end of ARM Ltd. Versatile Express family
+
+### ----------------------------------------------------------------------------
+### Xilinx Zynq ARM Cortex A9 Platform
+### ----------------------------------------------------------------------------
+CONFIG_ARCH_ZYNQ=y
+
+### ----------------------------------------------------------------------------
+### Enable ThumbEE CPU extension
+### ----------------------------------------------------------------------------
+CONFIG_ARM_THUMBEE=y
+
+### ----------------------------------------------------------------------------
+### ARM errata: no automatic Store Buffer drain
+### ----------------------------------------------------------------------------
+CONFIG_ARM_ERRATA_754327=y
+
+## end of System Type
+
+## =============================================================================
+## Kernel Features
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### Symmetric Multi-Processing
+### ----------------------------------------------------------------------------
+CONFIG_SMP=y
+
+### ----------------------------------------------------------------------------
+### Support cpu topology definition
+### ----------------------------------------------------------------------------
+### CONFIG_ARM_CPU_TOPOLOGY=y
+
+#### 
+#### Multi-core scheduler support
+#### 
+CONFIG_SCHED_MC=y
+
+#### 
+#### SMT scheduler support
+#### 
+CONFIG_SCHED_SMT=y
+
+### ----------------------------------------------------------------------------
+### Maximum number of CPUs (2-32)
+### ----------------------------------------------------------------------------
+CONFIG_NR_CPUS=2
+
+### ----------------------------------------------------------------------------
+### High Memory Support
+### ----------------------------------------------------------------------------
+CONFIG_HIGHMEM=y
+
+### ----------------------------------------------------------------------------
+### Use PLTs to allow module memory to spill over into vmalloc area
+### ----------------------------------------------------------------------------
+# CONFIG_ARM_MODULE_PLTS is not set
+
+## end of Kernel Features
+
+## =============================================================================
+## Boot options
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### Default kernel command string
+### ----------------------------------------------------------------------------
+CONFIG_CMDLINE="console=ttyPS0,115200n8 root=/dev/ram rw initrd=0x00800000,16M earlyprintk mtdparts=physmap-flash.0:12K(nor-fsbl),512K(nor-u-boot),5M(nor-linux),9M(nor-user),1M(nor-scratch),-(nor-rootfs)"
+
+## end of Boot options
+
+## =============================================================================
+## CPU Power Management
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### CPU Frequency scaling
+### ----------------------------------------------------------------------------
+
+#### 
+#### CPU Frequency scaling
+#### 
+CONFIG_CPU_FREQ=y
+
+##### 
+##### CPU frequency transition statistics
+##### 
+CONFIG_CPU_FREQ_STAT=y
+
+##### 
+##### Default CPUFreq governor
+##### 
+
+###### 
+###### performance
+###### 
+###### CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE is not set
+
+###### 
+###### powersave
+###### 
+###### CONFIG_CPU_FREQ_DEFAULT_GOV_POWERSAVE is not set
+
+###### 
+###### userspace
+###### 
+CONFIG_CPU_FREQ_DEFAULT_GOV_USERSPACE=y
+
+###### 
+###### ondemand
+###### 
+###### CONFIG_CPU_FREQ_DEFAULT_GOV_ONDEMAND is not set
+
+###### 
+###### conservative
+###### 
+###### CONFIG_CPU_FREQ_DEFAULT_GOV_CONSERVATIVE is not set
+
+###### 
+###### schedutil
+###### 
+###### CONFIG_CPU_FREQ_DEFAULT_GOV_SCHEDUTIL is not set
+
+##### end of Default CPUFreq governor
+
+##### 
+##### 'performance' governor
+##### 
+CONFIG_CPU_FREQ_GOV_PERFORMANCE=y
+
+##### 
+##### 'powersave' governor
+##### 
+CONFIG_CPU_FREQ_GOV_POWERSAVE=y
+
+##### 
+##### 'ondemand' cpufreq policy governor
+##### 
+CONFIG_CPU_FREQ_GOV_ONDEMAND=y
+
+##### 
+##### 'conservative' cpufreq governor
+##### 
+CONFIG_CPU_FREQ_GOV_CONSERVATIVE=y
+
+### end of CPU Frequency scaling
+
+### ----------------------------------------------------------------------------
+### CPU Idle
+### ----------------------------------------------------------------------------
+
+#### 
+#### CPU idle PM support
+#### 
+CONFIG_CPU_IDLE=y
+
+##### 
+##### Ladder governor (for periodic timer tick)
+##### 
+CONFIG_CPU_IDLE_GOV_LADDER=y
+
+##### 
+##### ARM CPU Idle Drivers
+##### 
+
+###### 
+###### CPU Idle Driver for Xilinx Zynq processors
+###### 
+CONFIG_ARM_ZYNQ_CPUIDLE=y
+
+##### end of ARM CPU Idle Drivers
+
+### end of CPU Idle
+
+## end of CPU Power Management
+
+## =============================================================================
+## Floating point emulation
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### VFP-format floating point maths
+### ----------------------------------------------------------------------------
+CONFIG_VFP=y
+
+#### 
+#### Advanced SIMD (NEON) Extension support
+#### 
+CONFIG_NEON=y
+
+## end of Floating point emulation
+
+## =============================================================================
+## General architecture-dependent options
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### Enable seccomp to safely execute untrusted bytecode
+### ----------------------------------------------------------------------------
+# CONFIG_SECCOMP is not set
+
+## end of General architecture-dependent options
+
+## =============================================================================
+## Enable loadable module support
+## =============================================================================
+CONFIG_MODULES=y
+
+### ----------------------------------------------------------------------------
+### Module unloading
+### ----------------------------------------------------------------------------
+CONFIG_MODULE_UNLOAD=y
+
+#### 
+#### Forced module unloading
+#### 
+CONFIG_MODULE_FORCE_UNLOAD=y
+
+### ----------------------------------------------------------------------------
+### Module versioning support
+### ----------------------------------------------------------------------------
+CONFIG_MODVERSIONS=y
+
+## end of Enable loadable module support
+
+## =============================================================================
+## Enable the block layer
+## =============================================================================
+## CONFIG_BLOCK=y
+
+### ----------------------------------------------------------------------------
+### IO Schedulers
+### ----------------------------------------------------------------------------
+
+#### 
+#### BFQ I/O scheduler
+#### 
+# CONFIG_IOSCHED_BFQ is not set
+
+### end of IO Schedulers
+
+## end of Enable the block layer
+
+## =============================================================================
+## Executable file formats
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### Write ELF core dumps with partial segments
+### ----------------------------------------------------------------------------
+# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
+
+## end of Executable file formats
+
+## =============================================================================
+## Memory Management options
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### Allow for memory compaction
+### ----------------------------------------------------------------------------
+# CONFIG_COMPACTION is not set
+
+### ----------------------------------------------------------------------------
+### Contiguous Memory Allocator
+### ----------------------------------------------------------------------------
+CONFIG_CMA=y
+
+## end of Memory Management options
+
+## =============================================================================
+## Networking support
+## =============================================================================
+CONFIG_NET=y
+
+### ----------------------------------------------------------------------------
+### Networking options
+### ----------------------------------------------------------------------------
+
+#### 
+#### Packet socket
+#### 
+CONFIG_PACKET=y
+
+#### 
+#### Unix domain sockets
+#### 
+CONFIG_UNIX=y
+
+#### 
+#### TCP/IP networking
+#### 
+CONFIG_INET=y
+
+##### 
+##### IP: multicasting
+##### 
+CONFIG_IP_MULTICAST=y
+
+##### 
+##### IP: kernel level autoconfiguration
+##### 
+CONFIG_IP_PNP=y
+
+###### 
+###### IP: DHCP support
+###### 
+CONFIG_IP_PNP_DHCP=y
+
+###### 
+###### IP: BOOTP support
+###### 
+CONFIG_IP_PNP_BOOTP=y
+
+###### 
+###### IP: RARP support
+###### 
+CONFIG_IP_PNP_RARP=y
+
+##### 
+##### IP: tunneling
+##### 
+CONFIG_NET_IPIP=m
+
+#### 
+#### Timestamping in PHY devices
+#### 
+CONFIG_NETWORK_PHY_TIMESTAMPING=y
+
+#### 
+#### 802.1Q/802.1ad VLAN Support
+#### 
+CONFIG_VLAN_8021Q=y
+
+##### 
+##### GVRP (GARP VLAN Registration Protocol) support
+##### 
+CONFIG_VLAN_8021Q_GVRP=y
+
+### end of Networking options
+
+### ----------------------------------------------------------------------------
+### CAN bus subsystem support
+### ----------------------------------------------------------------------------
+CONFIG_CAN=y
+
+### end of CAN bus subsystem support
+
+### ----------------------------------------------------------------------------
+### Wireless
+### ----------------------------------------------------------------------------
+### CONFIG_WIRELESS=y
+
+#### 
+#### cfg80211 - wireless configuration API
+#### 
+CONFIG_CFG80211=m
+
+##### 
+##### nl80211 testmode command
+##### 
+CONFIG_NL80211_TESTMODE=y
+
+##### 
+##### enable developer warnings
+##### 
+CONFIG_CFG80211_DEVELOPER_WARNINGS=y
+
+##### 
+##### cfg80211 certification onus
+##### 
+CONFIG_CFG80211_CERTIFICATION_ONUS=y
+
+###### 
+###### cfg80211 regulatory support for cellular base station hints
+###### 
+CONFIG_CFG80211_REG_CELLULAR_HINTS=y
+
+###### 
+###### cfg80211 support for NO_IR relaxation
+###### 
+CONFIG_CFG80211_REG_RELAX_NO_IR=y
+
+##### 
+##### cfg80211 DebugFS entries
+##### 
+CONFIG_CFG80211_DEBUGFS=y
+
+##### 
+##### cfg80211 wireless extensions compatibility
+##### 
+CONFIG_CFG80211_WEXT=y
+
+#### 
+#### Generic IEEE 802.11 Networking Stack (mac80211)
+#### 
+CONFIG_MAC80211=m
+
+#### 
+#### Enable mac80211 mesh networking support
+#### 
+CONFIG_MAC80211_MESH=y
+
+#### 
+#### Enable LED triggers
+#### 
+CONFIG_MAC80211_LEDS=y
+
+#### 
+#### Export mac80211 internals in DebugFS
+#### 
+CONFIG_MAC80211_DEBUGFS=y
+
+#### 
+#### Trace all mac80211 debug messages
+#### 
+CONFIG_MAC80211_MESSAGE_TRACING=y
+
+#### 
+#### Select mac80211 debugging features
+#### 
+CONFIG_MAC80211_DEBUG_MENU=y
+
+#### end of Select mac80211 debugging features
+
+### end of Wireless
+
+## end of Networking support
+
+## =============================================================================
+## Device Drivers
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### PCI support
+### ----------------------------------------------------------------------------
+CONFIG_PCI=y
+
+#### 
+#### Message Signaled Interrupts (MSI and MSI-X)
+#### 
+CONFIG_PCI_MSI=y
+
+#### 
+#### PCI controller drivers
+#### 
+
+##### 
+##### Xilinx AXI PCIe controller
+##### 
+CONFIG_PCIE_XILINX=y
+
+#### end of PCI controller drivers
+
+### end of PCI support
+
+### ----------------------------------------------------------------------------
+### Generic Driver Options
+### ----------------------------------------------------------------------------
+
+#### 
+#### Support for uevent helper
+#### 
+CONFIG_UEVENT_HELPER=y
+
+##### 
+##### path to uevent helper
+##### 
+CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
+
+#### 
+#### Maintain a devtmpfs filesystem to mount at /dev
+#### 
+CONFIG_DEVTMPFS=y
+
+##### 
+##### Automount devtmpfs at /dev, after the kernel mounted the rootfs
+##### 
+CONFIG_DEVTMPFS_MOUNT=y
+
+### end of Generic Driver Options
+
+### ----------------------------------------------------------------------------
+### Connector - unified userspace <-> kernelspace linker
+### ----------------------------------------------------------------------------
+CONFIG_CONNECTOR=y
+
+### end of Connector - unified userspace <-> kernelspace linker
+
+### ----------------------------------------------------------------------------
+### Memory Technology Device (MTD) support
+### ----------------------------------------------------------------------------
+CONFIG_MTD=y
+
+#### 
+#### Partition parsers
+#### 
+
+##### 
+##### Command line partition table parsing
+##### 
+CONFIG_MTD_CMDLINE_PARTS=y
+
+#### end of Partition parsers
+
+#### 
+#### Caching block device access to MTD devices
+#### 
+CONFIG_MTD_BLOCK=y
+
+#### 
+#### RAM/ROM/Flash chip drivers
+#### 
+
+##### 
+##### Detect flash chips by Common Flash Interface (CFI) probe
+##### 
+CONFIG_MTD_CFI=y
+
+##### 
+##### Support for CFI command set 0002 (AMD/Fujitsu/Spansion chips)
+##### 
+CONFIG_MTD_CFI_AMDSTD=y
+
+#### end of RAM/ROM/Flash chip drivers
+
+#### 
+#### Mapping drivers for chip access
+#### 
+
+##### 
+##### Flash device in physical memory map
+##### 
+CONFIG_MTD_PHYSMAP=y
+
+###### 
+###### Memory device in physical memory map based on OF description
+###### 
+CONFIG_MTD_PHYSMAP_OF=y
+
+#### end of Mapping drivers for chip access
+
+#### 
+#### SPI NOR device support
+#### 
+CONFIG_MTD_SPI_NOR=y
+
+#### end of SPI NOR device support
+
+### end of Memory Technology Device (MTD) support
+
+### ----------------------------------------------------------------------------
+### Device Tree and Open Firmware support
+### ----------------------------------------------------------------------------
+### CONFIG_OF=y
+
+#### 
+#### Device Tree overlays
+#### 
+CONFIG_OF_OVERLAY=y
+
+### end of Device Tree and Open Firmware support
+
+### ----------------------------------------------------------------------------
+### Block devices
+### ----------------------------------------------------------------------------
+### CONFIG_BLK_DEV=y
+
+#### 
+#### Loopback device support
+#### 
+CONFIG_BLK_DEV_LOOP=y
+
+#### 
+#### RAM block device support
+#### 
+CONFIG_BLK_DEV_RAM=y
+
+##### 
+##### Default number of RAM disks
+##### 
+CONFIG_BLK_DEV_RAM_COUNT=2
+
+##### 
+##### Default RAM disk size (kbytes)
+##### 
+CONFIG_BLK_DEV_RAM_SIZE=16384
+
+### end of Block devices
+
+### ----------------------------------------------------------------------------
+### Misc devices
+### ----------------------------------------------------------------------------
+
+#### 
+#### Generic on-chip SRAM driver
+#### 
+CONFIG_SRAM=y
+
+#### 
+#### EEPROM support
+#### 
+
+##### 
+##### I2C EEPROMs / RAMs / ROMs from most vendors
+##### 
+CONFIG_EEPROM_AT24=y
+
+##### 
+##### SPI EEPROMs (FRAMs) from most vendors
+##### 
+CONFIG_EEPROM_AT25=y
+
+#### end of EEPROM support
+
+### end of Misc devices
+
+### ----------------------------------------------------------------------------
+### SCSI device support
+### ----------------------------------------------------------------------------
+
+#### 
+#### SCSI device support
+#### 
+CONFIG_SCSI=y
+
+#### 
+#### SCSI disk support
+#### 
+CONFIG_BLK_DEV_SD=y
+
+#### 
+#### SCSI generic support
+#### 
+CONFIG_CHR_DEV_SG=y
+
+#### 
+#### /dev/bsg support (SG v4)
+#### 
+# CONFIG_BLK_DEV_BSG is not set
+
+### end of SCSI device support
+
+### ----------------------------------------------------------------------------
+### Network device support
+### ----------------------------------------------------------------------------
+CONFIG_NETDEVICES=y
+
+#### 
+#### Ethernet driver support
+#### 
+#### CONFIG_ETHERNET=y
+
+##### 
+##### Cadence devices
+##### 
+##### CONFIG_NET_VENDOR_CADENCE=y
+
+###### 
+###### Cadence MACB/GEM support
+###### 
+CONFIG_MACB=y
+
+##### 
+##### Intel devices
+##### 
+##### CONFIG_NET_VENDOR_INTEL=y
+
+###### 
+###### Intel(R) PRO/1000 PCI-Express Gigabit Ethernet support
+###### 
+CONFIG_E1000E=y
+
+##### 
+##### Realtek devices
+##### 
+##### CONFIG_NET_VENDOR_REALTEK=y
+
+###### 
+###### Realtek 8169/8168/8101/8125 ethernet support
+###### 
+CONFIG_R8169=y
+
+##### 
+##### STMicroelectronics devices
+##### 
+##### CONFIG_NET_VENDOR_STMICRO=y
+
+###### 
+###### STMicroelectronics Multi-Gigabit Ethernet driver
+###### 
+CONFIG_STMMAC_ETH=y
+
+##### 
+##### Xilinx devices
+##### 
+##### CONFIG_NET_VENDOR_XILINX=y
+
+###### 
+###### Xilinx 10/100 Ethernet Lite support
+###### 
+CONFIG_XILINX_EMACLITE=y
+
+#### end of Ethernet driver support
+
+#### 
+#### PHY Device support and infrastructure
+#### 
+#### CONFIG_PHYLIB=y
+
+##### 
+##### Marvell Alaska PHYs
+##### 
+CONFIG_MARVELL_PHY=y
+
+##### 
+##### Micrel PHYs
+##### 
+CONFIG_MICREL_PHY=y
+
+##### 
+##### Vitesse PHYs
+##### 
+CONFIG_VITESSE_PHY=y
+
+#### end of PHY Device support and infrastructure
+
+#### 
+#### CAN Device Drivers
+#### 
+#### CONFIG_CAN_DEV=y
+
+##### 
+##### CAN device drivers with Netlink support
+##### 
+##### CONFIG_CAN_NETLINK=y
+
+###### 
+###### Xilinx CAN
+###### 
+CONFIG_CAN_XILINXCAN=y
+
+###### 
+###### Bosch C_CAN/D_CAN devices
+###### 
+CONFIG_CAN_C_CAN=y
+
+####### 
+####### Generic Platform Bus based C_CAN/D_CAN driver
+####### 
+CONFIG_CAN_C_CAN_PLATFORM=y
+
+###### end of Bosch C_CAN/D_CAN devices
+
+##### 
+##### CAN devices debugging messages
+##### 
+CONFIG_CAN_DEBUG_DEVICES=y
+
+#### end of CAN Device Drivers
+
+#### 
+#### MDIO bus device drivers
+#### 
+#### CONFIG_MDIO_DEVICE=y
+
+##### 
+##### Bitbanged MDIO buses
+##### 
+CONFIG_MDIO_BITBANG=y
+
+#### end of MDIO bus device drivers
+
+#### 
+#### USB Network Adapters
+#### 
+#### CONFIG_USB_NET_DRIVERS=y
+
+##### 
+##### USB CATC NetMate-based Ethernet device support
+##### 
+CONFIG_USB_CATC=m
+
+##### 
+##### USB KLSI KL5USB101-based ethernet device support
+##### 
+CONFIG_USB_KAWETH=m
+
+##### 
+##### USB Pegasus/Pegasus-II based ethernet device support
+##### 
+CONFIG_USB_PEGASUS=m
+
+##### 
+##### USB RTL8150 based ethernet device support
+##### 
+CONFIG_USB_RTL8150=m
+
+##### 
+##### Realtek RTL8152/RTL8153 Based USB Ethernet Adapters
+##### 
+CONFIG_USB_RTL8152=m
+
+##### 
+##### Microchip LAN78XX Based USB Ethernet Adapters
+##### 
+CONFIG_USB_LAN78XX=m
+
+##### 
+##### Multi-purpose USB Networking Framework
+##### 
+##### CONFIG_USB_USBNET=m
+
+###### 
+###### CDC EEM support
+###### 
+CONFIG_USB_NET_CDC_EEM=m
+
+###### 
+###### Huawei NCM embedded AT channel support
+###### 
+CONFIG_USB_NET_HUAWEI_CDC_NCM=m
+
+###### 
+###### CDC MBIM support
+###### 
+CONFIG_USB_NET_CDC_MBIM=m
+
+###### 
+###### Davicom DM96xx based USB 10/100 ethernet devices
+###### 
+CONFIG_USB_NET_DM9601=m
+
+###### 
+###### CoreChip-sz SR9700 based USB 1.1 10/100 ethernet devices
+###### 
+CONFIG_USB_NET_SR9700=m
+
+###### 
+###### CoreChip-sz SR9800 based USB 2.0 10/100 ethernet devices
+###### 
+CONFIG_USB_NET_SR9800=m
+
+###### 
+###### SMSC LAN75XX based USB 2.0 gigabit ethernet devices
+###### 
+CONFIG_USB_NET_SMSC75XX=m
+
+###### 
+###### SMSC LAN95XX based USB 2.0 10/100 ethernet devices
+###### 
+CONFIG_USB_NET_SMSC95XX=m
+
+###### 
+###### GeneSys GL620USB-A based cables
+###### 
+CONFIG_USB_NET_GL620A=m
+
+###### 
+###### Prolific PL-2301/2302/25A1/27A1 based cables
+###### 
+CONFIG_USB_NET_PLUSB=m
+
+###### 
+###### MosChip MCS7830 based Ethernet adapters
+###### 
+CONFIG_USB_NET_MCS7830=m
+
+##### 
+##### Simple USB Network Links (CDC Ethernet subset)
+##### 
+##### CONFIG_USB_NET_CDC_SUBSET=m
+
+###### 
+###### ALi M5632 based 'USB 2.0 Data Link' cables
+###### 
+CONFIG_USB_ALI_M5632=y
+
+###### 
+###### AnchorChips 2720 based cables (Xircom PGUNET, ...)
+###### 
+CONFIG_USB_AN2720=y
+
+###### 
+###### Epson 2888 based firmware (DEVELOPMENT)
+###### 
+CONFIG_USB_EPSON2888=y
+
+###### 
+###### KT Technology KC2190 based cables (InstaNet)
+###### 
+CONFIG_USB_KC2190=y
+
+##### 
+##### Conexant CX82310 USB ethernet port
+##### 
+CONFIG_USB_NET_CX82310_ETH=m
+
+##### 
+##### Samsung Kalmia based LTE USB modem
+##### 
+CONFIG_USB_NET_KALMIA=m
+
+##### 
+##### QMI WWAN driver for Qualcomm MSM based 3G and LTE modems
+##### 
+CONFIG_USB_NET_QMI_WWAN=m
+
+##### 
+##### Intellon PLC based usb adapter
+##### 
+CONFIG_USB_NET_INT51X1=m
+
+##### 
+##### Apple iPhone USB Ethernet driver
+##### 
+CONFIG_USB_IPHETH=m
+
+##### 
+##### USB-to-WWAN Driver for Sierra Wireless modems
+##### 
+CONFIG_USB_SIERRA_NET=m
+
+##### 
+##### LG VL600 modem dongle
+##### 
+CONFIG_USB_VL600=m
+
+##### 
+##### QingHeng CH9200 USB ethernet support
+##### 
+CONFIG_USB_NET_CH9200=m
+
+#### end of USB Network Adapters
+
+#### 
+#### Wireless LAN
+#### 
+#### CONFIG_WLAN=y
+
+##### 
+##### Marvell devices
+##### 
+##### CONFIG_WLAN_VENDOR_MARVELL=y
+
+###### 
+###### Marvell 8xxx Libertas WLAN driver support
+###### 
+CONFIG_LIBERTAS=m
+
+####### 
+####### Marvell Libertas 8388 USB 802.11b/g cards
+####### 
+CONFIG_LIBERTAS_USB=m
+
+####### 
+####### Marvell Libertas 8385/8686/8688 SDIO 802.11b/g cards
+####### 
+CONFIG_LIBERTAS_SDIO=m
+
+####### 
+####### Marvell Libertas 8686 SPI 802.11b/g cards
+####### 
+CONFIG_LIBERTAS_SPI=m
+
+####### 
+####### Enable full debugging output in the Libertas module.
+####### 
+CONFIG_LIBERTAS_DEBUG=y
+
+####### 
+####### Enable mesh support
+####### 
+CONFIG_LIBERTAS_MESH=y
+
+###### 
+###### Marvell 8xxx Libertas WLAN driver support with thin firmware
+###### 
+CONFIG_LIBERTAS_THINFIRM=m
+
+####### 
+####### Enable full debugging output in the Libertas thin firmware module.
+####### 
+CONFIG_LIBERTAS_THINFIRM_DEBUG=y
+
+####### 
+####### Marvell Libertas 8388 USB 802.11b/g cards with thin firmware
+####### 
+CONFIG_LIBERTAS_THINFIRM_USB=m
+
+###### 
+###### Marvell WiFi-Ex Driver
+###### 
+CONFIG_MWIFIEX=m
+
+####### 
+####### Marvell WiFi-Ex Driver for SD8786/SD8787/SD8797/SD8887/SD8897/SD8977/SD8978/SD8987/SD8997
+####### 
+CONFIG_MWIFIEX_SDIO=m
+
+####### 
+####### Marvell WiFi-Ex Driver for PCIE 8766/8897/8997
+####### 
+CONFIG_MWIFIEX_PCIE=m
+
+####### 
+####### Marvell WiFi-Ex Driver for USB8766/8797/8997
+####### 
+CONFIG_MWIFIEX_USB=m
+
+###### 
+###### Marvell 88W8xxx PCI/PCIe Wireless support
+###### 
+CONFIG_MWL8K=m
+
+##### 
+##### MediaTek devices
+##### 
+##### CONFIG_WLAN_VENDOR_MEDIATEK=y
+
+###### 
+###### MediaTek MT7601U (USB) support
+###### 
+CONFIG_MT7601U=m
+
+###### 
+###### MediaTek MT76x0U (USB) support
+###### 
+CONFIG_MT76x0U=m
+
+###### 
+###### MediaTek MT76x2E (PCIe) support
+###### 
+CONFIG_MT76x2E=m
+
+###### 
+###### MediaTek MT76x2U (USB) support
+###### 
+CONFIG_MT76x2U=m
+
+##### 
+##### Ralink devices
+##### 
+##### CONFIG_WLAN_VENDOR_RALINK=y
+
+###### 
+###### Ralink driver support
+###### 
+CONFIG_RT2X00=m
+
+####### 
+####### Ralink rt2500 (USB) support
+####### 
+CONFIG_RT2500USB=m
+
+####### 
+####### Ralink rt2501/rt73 (USB) support
+####### 
+CONFIG_RT73USB=m
+
+####### 
+####### Ralink rt27xx/rt28xx/rt30xx (USB) support
+####### 
+CONFIG_RT2800USB=m
+
+######## 
+######## rt2800usb - Include support for rt3573 devices (EXPERIMENTAL)
+######## 
+CONFIG_RT2800USB_RT3573=y
+
+######## 
+######## rt2800usb - Include support for rt53xx devices (EXPERIMENTAL)
+######## 
+CONFIG_RT2800USB_RT53XX=y
+
+######## 
+######## rt2800usb - Include support for rt55xx devices (EXPERIMENTAL)
+######## 
+CONFIG_RT2800USB_RT55XX=y
+
+######## 
+######## rt2800usb - Include support for unknown (USB) devices
+######## 
+CONFIG_RT2800USB_UNKNOWN=y
+
+###### end of Ralink driver support
+
+##### 
+##### Realtek devices
+##### 
+##### CONFIG_WLAN_VENDOR_REALTEK=y
+
+###### 
+###### Realtek 8180/8185/8187SE PCI support
+###### 
+CONFIG_RTL8180=m
+
+###### 
+###### Realtek 8187 and 8187B USB support
+###### 
+CONFIG_RTL8187=m
+
+###### 
+###### Realtek 802.11n USB wireless chips support
+###### 
+CONFIG_RTL8XXXU=m
+
+####### 
+####### Include support for untested Realtek 8xxx USB devices (EXPERIMENTAL)
+####### 
+CONFIG_RTL8XXXU_UNTESTED=y
+
+##### 
+##### Redpine Signals Inc devices
+##### 
+##### CONFIG_WLAN_VENDOR_RSI=y
+
+###### 
+###### Redpine Signals Inc 91x WLAN driver support
+###### 
+CONFIG_RSI_91X=m
+
+##### 
+##### STMicroelectronics devices
+##### 
+##### CONFIG_WLAN_VENDOR_ST=y
+
+###### 
+###### CW1200 WLAN support
+###### 
+CONFIG_CW1200=m
+
+####### 
+####### Support SDIO platforms
+####### 
+CONFIG_CW1200_WLAN_SDIO=m
+
+####### 
+####### Support SPI platforms
+####### 
+CONFIG_CW1200_WLAN_SPI=m
+
+##### 
+##### Texas Instrument devices
+##### 
+##### CONFIG_WLAN_VENDOR_TI=y
+
+###### 
+###### TI wl1251 driver support
+###### 
+CONFIG_WL1251=m
+
+####### 
+####### TI wl1251 SPI support
+####### 
+CONFIG_WL1251_SPI=m
+
+####### 
+####### TI wl1251 SDIO support
+####### 
+CONFIG_WL1251_SDIO=m
+
+###### 
+###### TI wl12xx support
+###### 
+CONFIG_WL12XX=m
+
+###### 
+###### TI wl18xx support
+###### 
+CONFIG_WL18XX=m
+
+###### 
+###### TI wlcore support
+###### 
+###### CONFIG_WLCORE=m
+
+####### 
+####### TI wlcore SPI support
+####### 
+CONFIG_WLCORE_SPI=m
+
+####### 
+####### TI wlcore SDIO support
+####### 
+CONFIG_WLCORE_SDIO=m
+
+##### 
+##### ZyDAS devices
+##### 
+##### CONFIG_WLAN_VENDOR_ZYDAS=y
+
+###### 
+###### USB ZD1201 based Wireless device support
+###### 
+CONFIG_USB_ZD1201=m
+
+###### 
+###### ZyDAS ZD1211/ZD1211B USB-wireless support
+###### 
+CONFIG_ZD1211RW=m
+
+####### 
+####### ZyDAS ZD1211 debugging
+####### 
+CONFIG_ZD1211RW_DEBUG=y
+
+##### 
+##### Wireless RNDIS USB support
+##### 
+CONFIG_USB_NET_RNDIS_WLAN=m
+
+#### end of Wireless LAN
+
+### end of Network device support
+
+### ----------------------------------------------------------------------------
+### Input device support
+### ----------------------------------------------------------------------------
+
+#### 
+#### Generic input layer (needed for keyboard, mouse, ...)
+#### 
+#### CONFIG_INPUT=y
+
+##### 
+##### Sparse keymap support library
+##### 
+CONFIG_INPUT_SPARSEKMAP=y
+
+##### 
+##### Mouse interface
+##### 
+CONFIG_INPUT_MOUSEDEV=y
+
+###### 
+###### Provide legacy /dev/psaux device
+###### 
+CONFIG_INPUT_MOUSEDEV_PSAUX=y
+
+##### 
+##### Event interface
+##### 
+CONFIG_INPUT_EVDEV=y
+
+##### 
+##### Keyboards
+##### 
+##### CONFIG_INPUT_KEYBOARD=y
+
+###### 
+###### GPIO Buttons
+###### 
+CONFIG_KEYBOARD_GPIO=y
+
+###### 
+###### Polled GPIO buttons
+###### 
+CONFIG_KEYBOARD_GPIO_POLLED=y
+
+##### end of Keyboards
+
+#### 
+#### Hardware I/O ports
+#### 
+
+##### 
+##### AMBA KMI keyboard controller
+##### 
+CONFIG_SERIO_AMBAKMI=y
+
+#### end of Hardware I/O ports
+
+### end of Input device support
+
+### ----------------------------------------------------------------------------
+### Character devices
+### ----------------------------------------------------------------------------
+
+#### 
+#### Enable TTY
+#### 
+#### CONFIG_TTY=y
+
+##### 
+##### Legacy (BSD) PTY support
+##### 
+##### CONFIG_LEGACY_PTYS=y
+
+###### 
+###### Maximum number of legacy PTY in use
+###### 
+CONFIG_LEGACY_PTY_COUNT=16
+
+##### 
+##### Serial drivers
+##### 
+
+###### 
+###### 8250/16550 and compatible serial support
+###### 
+CONFIG_SERIAL_8250=y
+
+####### 
+####### Console on 8250/16550 and compatible serial port
+####### 
+CONFIG_SERIAL_8250_CONSOLE=y
+
+###### 
+###### Maximum number of 8250/16550 serial ports
+###### 
+CONFIG_SERIAL_8250_NR_UARTS=2
+
+###### 
+###### Number of 8250/16550 serial ports to register at runtime
+###### 
+CONFIG_SERIAL_8250_RUNTIME_UARTS=2
+
+###### 
+###### Support for Synopsys DesignWare 8250 quirks
+###### 
+CONFIG_SERIAL_8250_DW=y
+
+###### 
+###### Cadence (Xilinx Zynq) UART support
+###### 
+CONFIG_SERIAL_XILINX_PS_UART=y
+
+####### 
+####### Cadence UART console support
+####### 
+CONFIG_SERIAL_XILINX_PS_UART_CONSOLE=y
+
+##### end of Serial drivers
+
+#### 
+#### Xillybus generic FPGA interface
+#### 
+CONFIG_XILLYBUS=m
+
+### end of Character devices
+
+### ----------------------------------------------------------------------------
+### I2C support
+### ----------------------------------------------------------------------------
+
+#### 
+#### I2C support
+#### 
+#### CONFIG_I2C=y
+
+##### 
+##### I2C device interface
+##### 
+CONFIG_I2C_CHARDEV=y
+
+##### 
+##### I2C bus multiplexing support
+##### 
+CONFIG_I2C_MUX=y
+
+###### 
+###### Multiplexer I2C Chip support
+###### 
+
+####### 
+####### NXP PCA954x/PCA984x and Maxim MAX735x/MAX736x I2C Mux/switches
+####### 
+CONFIG_I2C_MUX_PCA954x=y
+
+###### end of Multiplexer I2C Chip support
+
+##### 
+##### I2C Hardware Bus support
+##### 
+
+###### 
+###### Cadence I2C Controller
+###### 
+CONFIG_I2C_CADENCE=y
+
+###### 
+###### Synopsys DesignWare Platform
+###### 
+CONFIG_I2C_DESIGNWARE_PLATFORM=y
+
+##### end of I2C Hardware Bus support
+
+### end of I2C support
+
+### ----------------------------------------------------------------------------
+### SPI support
+### ----------------------------------------------------------------------------
+CONFIG_SPI=y
+
+#### 
+#### Cadence SPI controller
+#### 
+CONFIG_SPI_CADENCE=y
+
+#### 
+#### Xilinx SPI controller common module
+#### 
+CONFIG_SPI_XILINX=y
+
+### end of SPI support
+
+### ----------------------------------------------------------------------------
+### GPIO Support
+### ----------------------------------------------------------------------------
+### CONFIG_GPIOLIB=y
+
+#### 
+#### /sys/class/gpio/... (sysfs interface)
+#### 
+CONFIG_GPIO_SYSFS=y
+
+#### 
+#### Memory mapped GPIO drivers
+#### 
+
+##### 
+##### Synopsys DesignWare APB GPIO driver
+##### 
+CONFIG_GPIO_DWAPB=y
+
+##### 
+##### Xilinx Zynq GPIO support
+##### 
+CONFIG_GPIO_ZYNQ=y
+
+#### end of Memory mapped GPIO drivers
+
+### end of GPIO Support
+
+### ----------------------------------------------------------------------------
+### Hardware Monitoring support
+### ----------------------------------------------------------------------------
+### CONFIG_HWMON=y
+
+#### 
+#### PMBus support
+#### 
+CONFIG_PMBUS=y
+
+##### 
+##### Linear Technologies LTC2978 and compatibles
+##### 
+CONFIG_SENSORS_LTC2978=y
+
+###### 
+###### Regulator support for LTC2978 and compatibles
+###### 
+CONFIG_SENSORS_LTC2978_REGULATOR=y
+
+##### 
+##### TI UCD90120, UCD90124, UCD90160, UCD90320, UCD9090, UCD90910
+##### 
+CONFIG_SENSORS_UCD9000=y
+
+##### 
+##### TI UCD9220, UCD9222, UCD9224, UCD9240, UCD9244, UCD9246, UCD9248
+##### 
+CONFIG_SENSORS_UCD9200=y
+
+#### end of PMBus support
+
+### end of Hardware Monitoring support
+
+### ----------------------------------------------------------------------------
+### Thermal drivers
+### ----------------------------------------------------------------------------
+CONFIG_THERMAL=y
+
+#### 
+#### Generic cpu cooling support
+#### 
+CONFIG_CPU_THERMAL=y
+
+### end of Thermal drivers
+
+### ----------------------------------------------------------------------------
+### Watchdog Timer Support
+### ----------------------------------------------------------------------------
+CONFIG_WATCHDOG=y
+
+#### 
+#### Xilinx Watchdog timer
+#### 
+CONFIG_XILINX_WATCHDOG=y
+
+#### 
+#### Cadence Watchdog Timer
+#### 
+CONFIG_CADENCE_WATCHDOG=y
+
+#### 
+#### Synopsys DesignWare watchdog
+#### 
+CONFIG_DW_WATCHDOG=y
+
+### end of Watchdog Timer Support
+
+### ----------------------------------------------------------------------------
+### Voltage and Current Regulator Support
+### ----------------------------------------------------------------------------
+CONFIG_REGULATOR=y
+
+### end of Voltage and Current Regulator Support
+
+### ----------------------------------------------------------------------------
+### CEC support
+### ----------------------------------------------------------------------------
+
+#### 
+#### HDMI CEC drivers
+#### 
+# CONFIG_MEDIA_CEC_SUPPORT is not set
+
+#### end of HDMI CEC drivers
+
+### end of CEC support
+
+### ----------------------------------------------------------------------------
+### Multimedia support
+### ----------------------------------------------------------------------------
+CONFIG_MEDIA_SUPPORT=y
+
+#### 
+#### Media drivers
+#### 
+
+##### 
+##### Media platform devices
+##### 
+##### CONFIG_MEDIA_PLATFORM_DRIVERS=y
+
+###### 
+###### V4L platform devices
+###### 
+CONFIG_V4L_PLATFORM_DRIVERS=y
+
+###### 
+###### Xilinx Video IP (EXPERIMENTAL)
+###### 
+CONFIG_VIDEO_XILINX=y
+
+####### 
+####### Xilinx Video Test Pattern Generator
+####### 
+CONFIG_VIDEO_XILINX_TPG=y
+
+##### end of Media platform devices
+
+#### end of Media drivers
+
+#### 
+#### Media ancillary drivers
+#### 
+
+##### 
+##### Video decoders
+##### 
+
+###### 
+###### Analog Devices ADV7604 decoder
+###### 
+CONFIG_VIDEO_ADV7604=y
+
+##### end of Video decoders
+
+#### end of Media ancillary drivers
+
+### end of Multimedia support
+
+### ----------------------------------------------------------------------------
+### Graphics support
+### ----------------------------------------------------------------------------
+
+#### 
+#### Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)
+#### 
+CONFIG_DRM=y
+
+#### end of Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)
+
+#### 
+#### Frame buffer Devices
+#### 
+
+##### 
+##### Support for frame buffer device drivers
+##### 
+CONFIG_FB=y
+
+##### end of Support for frame buffer device drivers
+
+#### end of Frame buffer Devices
+
+### end of Graphics support
+
+### ----------------------------------------------------------------------------
+### Sound card support
+### ----------------------------------------------------------------------------
+CONFIG_SOUND=y
+
+#### 
+#### Advanced Linux Sound Architecture
+#### 
+CONFIG_SND=y
+
+##### 
+##### ALSA for SoC audio support
+##### 
+CONFIG_SND_SOC=y
+
+###### 
+###### Audio support for Analog Devices reference designs
+###### 
+CONFIG_SND_SOC_ADI=y
+
+####### 
+####### AXI-I2S support
+####### 
+CONFIG_SND_SOC_ADI_AXI_I2S=y
+
+####### 
+####### AXI-SPDIF support
+####### 
+CONFIG_SND_SOC_ADI_AXI_SPDIF=y
+
+##### end of ALSA for SoC audio support
+
+#### end of Advanced Linux Sound Architecture
+
+### end of Sound card support
+
+### ----------------------------------------------------------------------------
+### HID bus support
+### ----------------------------------------------------------------------------
+### CONFIG_HID_SUPPORT=y
+
+#### 
+#### HID bus core support
+#### 
+#### CONFIG_HID=y
+
+##### 
+##### Special HID drivers
+##### 
+
+###### 
+###### Microsoft non-fully HID-compliant devices
+###### 
+CONFIG_HID_MICROSOFT=y
+
+##### end of Special HID drivers
+
+#### 
+#### I2C HID support
+#### 
+# CONFIG_I2C_HID is not set
+
+#### end of I2C HID support
+
+### end of HID bus support
+
+### ----------------------------------------------------------------------------
+### USB support
+### ----------------------------------------------------------------------------
+### CONFIG_USB_SUPPORT=y
+
+#### 
+#### Support for Host-side USB
+#### 
+CONFIG_USB=y
+
+#### 
+#### OTG support
+#### 
+CONFIG_USB_OTG=y
+
+#### 
+#### EHCI HCD (USB 2.0) support
+#### 
+CONFIG_USB_EHCI_HCD=y
+
+##### 
+##### Improved Transaction Translator scheduling
+##### 
+# CONFIG_USB_EHCI_TT_NEWSCHED is not set
+
+#### 
+#### USB Mass Storage support
+#### 
+CONFIG_USB_STORAGE=y
+
+#### 
+#### DesignWare USB2 DRD Core Support
+#### 
+CONFIG_USB_DWC2=y
+
+##### 
+##### DWC2 Mode Selection
+##### 
+
+###### 
+###### Host only mode
+###### 
+CONFIG_USB_DWC2_HOST=y
+
+###### 
+###### Gadget/Dual-role mode requires USB Gadget support to be enabled
+###### 
+
+###### 
+###### Gadget only mode
+###### 
+###### CONFIG_USB_DWC2_PERIPHERAL is not set
+
+###### 
+###### Dual Role mode
+###### 
+###### CONFIG_USB_DWC2_DUAL_ROLE is not set
+
+##### end of DWC2 Mode Selection
+
+#### 
+#### ChipIdea Highspeed Dual Role Controller
+#### 
+CONFIG_USB_CHIPIDEA=y
+
+##### 
+##### ChipIdea device controller
+##### 
+CONFIG_USB_CHIPIDEA_UDC=y
+
+##### 
+##### ChipIdea host controller
+##### 
+CONFIG_USB_CHIPIDEA_HOST=y
+
+#### 
+#### USB Physical Layer drivers
+#### 
+
+##### 
+##### NOP USB Transceiver Driver
+##### 
+CONFIG_NOP_USB_XCEIV=y
+
+##### 
+##### Generic ULPI Transceiver Driver
+##### 
+CONFIG_USB_ULPI=y
+
+#### end of USB Physical Layer drivers
+
+#### 
+#### USB Gadget Support
+#### 
+CONFIG_USB_GADGET=y
+
+##### 
+##### USB Peripheral Controller
+##### 
+
+###### 
+###### Xilinx USB Driver
+###### 
+CONFIG_USB_GADGET_XILINX=y
+
+##### end of USB Peripheral Controller
+
+##### 
+##### USB Gadget precomposed configurations
+##### 
+
+###### 
+###### Gadget Zero (DEVELOPMENT)
+###### 
+CONFIG_USB_ZERO=m
+
+##### end of USB Gadget precomposed configurations
+
+#### end of USB Gadget Support
+
+### end of USB support
+
+### ----------------------------------------------------------------------------
+### MMC/SD/SDIO card support
+### ----------------------------------------------------------------------------
+CONFIG_MMC=y
+
+#### 
+#### Secure Digital Host Controller Interface support
+#### 
+CONFIG_MMC_SDHCI=y
+
+##### 
+##### SDHCI platform and OF driver helper
+##### 
+CONFIG_MMC_SDHCI_PLTFM=y
+
+###### 
+###### SDHCI OF support for the Arasan SDHCI controllers
+###### 
+CONFIG_MMC_SDHCI_OF_ARASAN=y
+
+#### 
+#### Synopsys DesignWare Memory Card Interface
+#### 
+CONFIG_MMC_DW=y
+
+### end of MMC/SD/SDIO card support
+
+### ----------------------------------------------------------------------------
+### LED Support
+### ----------------------------------------------------------------------------
+CONFIG_NEW_LEDS=y
+
+#### 
+#### LED Class Support
+#### 
+CONFIG_LEDS_CLASS=y
+
+#### 
+#### LED Support for GPIO connected LEDs
+#### 
+CONFIG_LEDS_GPIO=y
+
+#### 
+#### LED Trigger support
+#### 
+#### CONFIG_LEDS_TRIGGERS=y
+
+##### 
+##### LED Timer Trigger
+##### 
+CONFIG_LEDS_TRIGGER_TIMER=y
+
+##### 
+##### LED One-shot Trigger
+##### 
+CONFIG_LEDS_TRIGGER_ONESHOT=y
+
+##### 
+##### LED Heartbeat Trigger
+##### 
+CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+
+##### 
+##### LED backlight Trigger
+##### 
+CONFIG_LEDS_TRIGGER_BACKLIGHT=y
+
+##### 
+##### LED CPU Trigger
+##### 
+CONFIG_LEDS_TRIGGER_CPU=y
+
+##### 
+##### LED Default ON Trigger
+##### 
+CONFIG_LEDS_TRIGGER_DEFAULT_ON=y
+
+##### 
+##### LED Transient Trigger
+##### 
+CONFIG_LEDS_TRIGGER_TRANSIENT=y
+
+##### 
+##### LED Camera Flash/Torch Trigger
+##### 
+CONFIG_LEDS_TRIGGER_CAMERA=y
+
+#### end of LED Trigger support
+
+### end of LED Support
+
+### ----------------------------------------------------------------------------
+### EDAC (Error Detection And Correction) reporting
+### ----------------------------------------------------------------------------
+CONFIG_EDAC=y
+
+### end of EDAC (Error Detection And Correction) reporting
+
+### ----------------------------------------------------------------------------
+### Real Time Clock
+### ----------------------------------------------------------------------------
+CONFIG_RTC_CLASS=y
+
+#### 
+#### Philips PCF8563/Epson RTC8564
+#### 
+CONFIG_RTC_DRV_PCF8563=y
+
+### end of Real Time Clock
+
+### ----------------------------------------------------------------------------
+### DMA Engine support
+### ----------------------------------------------------------------------------
+CONFIG_DMADEVICES=y
+
+#### 
+#### Altera / Intel mSGDMA Engine
+#### 
+CONFIG_ALTERA_MSGDMA=m
+
+#### 
+#### DMA API Driver for PL330
+#### 
+CONFIG_PL330_DMA=m
+
+#### 
+#### Xilinx AXI DMAS Engine
+#### 
+CONFIG_XILINX_DMA=m
+
+### end of DMA Engine support
+
+### ----------------------------------------------------------------------------
+### Userspace I/O drivers
+### ----------------------------------------------------------------------------
+CONFIG_UIO=y
+
+#### 
+#### Userspace I/O platform driver with generic IRQ handling
+#### 
+CONFIG_UIO_PDRV_GENIRQ=y
+
+### end of Userspace I/O drivers
+
+### ----------------------------------------------------------------------------
+### Common Clock Framework
+### ----------------------------------------------------------------------------
+### CONFIG_COMMON_CLK=y
+
+#### 
+#### Clock driver for SiLabs 570 and compatible devices
+#### 
+CONFIG_COMMON_CLK_SI570=y
+
+### end of Common Clock Framework
+
+### ----------------------------------------------------------------------------
+### Memory Controller drivers
+### ----------------------------------------------------------------------------
+CONFIG_MEMORY=y
+
+### end of Memory Controller drivers
+
+### ----------------------------------------------------------------------------
+### Industrial I/O support
+### ----------------------------------------------------------------------------
+CONFIG_IIO=y
+
+#### 
+#### Analog to digital converters
+#### 
+
+##### 
+##### Xilinx XADC driver
+##### 
+CONFIG_XILINX_XADC=y
+
+#### end of Analog to digital converters
+
+### end of Industrial I/O support
+
+### ----------------------------------------------------------------------------
+### Reliability, Availability and Serviceability (RAS) features
+### ----------------------------------------------------------------------------
+CONFIG_RAS=y
+
+### end of Reliability, Availability and Serviceability (RAS) features
+
+### ----------------------------------------------------------------------------
+### FPGA Configuration Framework
+### ----------------------------------------------------------------------------
+CONFIG_FPGA=y
+
+#### 
+#### Altera SOCFPGA FPGA Manager
+#### 
+CONFIG_FPGA_MGR_SOCFPGA=y
+
+#### 
+#### Altera Partial Reconfiguration IP Core
+#### 
+CONFIG_ALTERA_PR_IP_CORE=y
+
+##### 
+##### Platform support of Altera Partial Reconfiguration IP Core
+##### 
+CONFIG_ALTERA_PR_IP_CORE_PLAT=y
+
+#### 
+#### Xilinx Zynq FPGA
+#### 
+CONFIG_FPGA_MGR_ZYNQ_FPGA=y
+
+#### 
+#### FPGA Bridge Framework
+#### 
+CONFIG_FPGA_BRIDGE=y
+
+##### 
+##### Altera SoCFPGA FPGA Bridges
+##### 
+CONFIG_SOCFPGA_FPGA_BRIDGE=y
+
+##### 
+##### Altera FPGA Freeze Bridge
+##### 
+CONFIG_ALTERA_FREEZE_BRIDGE=y
+
+##### 
+##### Xilinx LogiCORE PR Decoupler
+##### 
+CONFIG_XILINX_PR_DECOUPLER=y
+
+##### 
+##### FPGA Region
+##### 
+CONFIG_FPGA_REGION=y
+
+###### 
+###### FPGA Region Device Tree Overlay Support
+###### 
+CONFIG_OF_FPGA_REGION=y
+
+### end of FPGA Configuration Framework
+
+## end of Device Drivers
+
+## =============================================================================
+## File systems
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### Second extended fs support
+### ----------------------------------------------------------------------------
+CONFIG_EXT2_FS=y
+
+#### 
+#### Ext2 extended attributes
+#### 
+CONFIG_EXT2_FS_XATTR=y
+
+##### 
+##### Ext2 POSIX Access Control Lists
+##### 
+CONFIG_EXT2_FS_POSIX_ACL=y
+
+### ----------------------------------------------------------------------------
+### The Extended 3 (ext3) filesystem
+### ----------------------------------------------------------------------------
+CONFIG_EXT3_FS=y
+
+#### 
+#### Ext3 POSIX Access Control Lists
+#### 
+CONFIG_EXT3_FS_POSIX_ACL=y
+
+### ----------------------------------------------------------------------------
+### Dnotify support
+### ----------------------------------------------------------------------------
+# CONFIG_DNOTIFY is not set
+
+### ----------------------------------------------------------------------------
+### DOS/FAT/EXFAT/NT Filesystems
+### ----------------------------------------------------------------------------
+
+#### 
+#### MSDOS fs support
+#### 
+CONFIG_MSDOS_FS=y
+
+#### 
+#### VFAT (Windows-95) fs support
+#### 
+CONFIG_VFAT_FS=y
+
+#### 
+#### NTFS file system support
+#### 
+CONFIG_NTFS_FS=y
+
+##### 
+##### NTFS write support
+##### 
+CONFIG_NTFS_RW=y
+
+### end of DOS/FAT/EXFAT/NT Filesystems
+
+### ----------------------------------------------------------------------------
+### Pseudo filesystems
+### ----------------------------------------------------------------------------
+
+#### 
+#### Tmpfs virtual memory file system support (former shm fs)
+#### 
+CONFIG_TMPFS=y
+
+##### 
+##### Tmpfs POSIX Access Control Lists
+##### 
+CONFIG_TMPFS_POSIX_ACL=y
+
+#### 
+#### Userspace-driven configuration filesystem
+#### 
+CONFIG_CONFIGFS_FS=y
+
+### end of Pseudo filesystems
+
+### ----------------------------------------------------------------------------
+### Miscellaneous filesystems
+### ----------------------------------------------------------------------------
+### CONFIG_MISC_FILESYSTEMS=y
+
+#### 
+#### Journalling Flash File System v2 (JFFS2) support
+#### 
+CONFIG_JFFS2_FS=y
+
+##### 
+##### JFFS2 summary support
+##### 
+CONFIG_JFFS2_SUMMARY=y
+
+### end of Miscellaneous filesystems
+
+### ----------------------------------------------------------------------------
+### Network File Systems
+### ----------------------------------------------------------------------------
+### CONFIG_NETWORK_FILESYSTEMS=y
+
+#### 
+#### NFS client support
+#### 
+CONFIG_NFS_FS=y
+
+#### 
+#### Root file system on NFS
+#### 
+CONFIG_ROOT_NFS=y
+
+### end of Network File Systems
+
+### ----------------------------------------------------------------------------
+### Native language support
+### ----------------------------------------------------------------------------
+### CONFIG_NLS=y
+
+#### 
+#### Codepage 437 (United States, Canada)
+#### 
+CONFIG_NLS_CODEPAGE_437=y
+
+#### 
+#### ASCII (United States)
+#### 
+CONFIG_NLS_ASCII=y
+
+#### 
+#### NLS ISO 8859-1  (Latin 1; Western European Languages)
+#### 
+CONFIG_NLS_ISO8859_1=y
+
+### end of Native language support
+
+## end of File systems
+
+## =============================================================================
+## Cryptographic API
+## =============================================================================
+## CONFIG_CRYPTO=y
+
+### ----------------------------------------------------------------------------
+### Block ciphers
+### ----------------------------------------------------------------------------
+
+#### 
+#### AES (Advanced Encryption Standard)
+#### 
+CONFIG_CRYPTO_AES=y
+
+### end of Block ciphers
+
+### ----------------------------------------------------------------------------
+### AEAD (authenticated encryption with associated data) ciphers
+### ----------------------------------------------------------------------------
+
+#### 
+#### Sequence Number IV Generator
+#### 
+CONFIG_CRYPTO_SEQIV=m
+
+#### 
+#### Encrypted Chain IV Generator
+#### 
+CONFIG_CRYPTO_ECHAINIV=m
+
+### end of AEAD (authenticated encryption with associated data) ciphers
+
+## end of Cryptographic API
+
+## =============================================================================
+## Library routines
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### DMA Contiguous Memory Allocator
+### ----------------------------------------------------------------------------
+CONFIG_DMA_CMA=y
+
+### ----------------------------------------------------------------------------
+### Select compiled-in fonts
+### ----------------------------------------------------------------------------
+CONFIG_FONTS=y
+
+#### 
+#### VGA 8x8 font
+#### 
+CONFIG_FONT_8x8=y
+
+#### 
+#### VGA 8x16 font
+#### 
+CONFIG_FONT_8x16=y
+
+## end of Library routines
+
+## =============================================================================
+## Kernel hacking
+## =============================================================================
+
+### ----------------------------------------------------------------------------
+### printk and dmesg options
+### ----------------------------------------------------------------------------
+
+#### 
+#### Show timing information on printks
+#### 
+CONFIG_PRINTK_TIME=y
+
+#### 
+#### Enable dynamic printk() support
+#### 
+CONFIG_DYNAMIC_DEBUG=y
+
+### end of printk and dmesg options
+
+### ----------------------------------------------------------------------------
+### Generic Kernel Debugging Instruments
+### ----------------------------------------------------------------------------
+
+#### 
+#### Magic SysRq key
+#### 
+CONFIG_MAGIC_SYSRQ=y
+
+#### 
+#### Debug Filesystem
+#### 
+CONFIG_DEBUG_FS=y
+
+### end of Generic Kernel Debugging Instruments
+
+### ----------------------------------------------------------------------------
+### Debug Oops, Lockups and Hangs
+### ----------------------------------------------------------------------------
+
+#### 
+#### Detect Hung Tasks
+#### 
+CONFIG_DETECT_HUNG_TASK=y
+
+### end of Debug Oops, Lockups and Hangs
+
+### ----------------------------------------------------------------------------
+### Scheduler Debugging
+### ----------------------------------------------------------------------------
+
+#### 
+#### Collect scheduler debugging info
+#### 
+# CONFIG_SCHED_DEBUG is not set
+
+### end of Scheduler Debugging
+
+### ----------------------------------------------------------------------------
+### RCU Debugging
+### ----------------------------------------------------------------------------
+
+#### 
+#### RCU CPU stall timeout in seconds
+#### 
+CONFIG_RCU_CPU_STALL_TIMEOUT=60
+
+#### 
+#### Enable tracing for RCU
+#### 
+# CONFIG_RCU_TRACE is not set
+
+### end of RCU Debugging
+
+### ----------------------------------------------------------------------------
+### Tracers
+### ----------------------------------------------------------------------------
+# CONFIG_FTRACE is not set
+
+### end of Tracers
+
+### ----------------------------------------------------------------------------
+### arm Debugging
+### ----------------------------------------------------------------------------
+
+#### 
+#### Verbose user fault messages
+#### 
+CONFIG_DEBUG_USER=y
+
+### end of arm Debugging
+
+## end of Kernel hacking
+
