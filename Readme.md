@@ -37,9 +37,14 @@ For Linux Kernel image and Debian Packages, please refer to the respective relea
 
 | Version  | Local Name          | Build Version | Release Tag          |
 |:---------|:--------------------|:--------------|:---------------------|
-| 6.6.40   | armv7-fpga          | -             | Under Construction   |
+| 6.6.40   | armv7-fpga          | 2             | [6.6.40-armv7-fpga-2](https://github.com/ikwzm/FPGA-SoC-Linux-Kernel-6.6/tree/6.6.40-armv7-fpga-2) |
 
 Download
 ------------------------------------------------------------------------------------
 
-Under Construction
+```console
+shell$ export RELEASE_TAG=6.6.40-armv7-fpga-2
+shell$ wget https://github.com/ikwzm/FPGA-SoC-Linux-Kernel-6.6/archive/refs/tags/$RELEASE_TAG.tar.gz
+shell$ tar xfz $RELEASE_TAG.tar.gz
+shell$ cd FPGA-SoC-Linux-Kernel-6.6-$RELEASE_TAG
+```
