@@ -36,7 +36,7 @@ shell$ git commit -m "patch for armv7-fpga"
 ##### Patch for usb chipidea driver
 
 ```console
-shell$ patch -p1 < ../patches/linux-6.6.40-armv7-fpga-patch-usb-ulpi.diff
+shell$ patch -p1 < ../patches/linux-6.6.40-armv7-fpga-usb-ulpi.diff
 shell$ git add --update
 shell$ git commit -m "patch for usb chipidea driver for issue #3"
 ```
@@ -52,8 +52,8 @@ shell$ git commit -m "patch for scripts/package/builddeb to add tools/include an
 ##### Create tag and .version
 
 ```console
-shell$ git tag -a v6.6.40-armv7-fpga -m "release v6.6.40-armv7-fpga-1"
-shell$ echo 0 > .version
+shell$ git tag -a v6.6.40-armv7-fpga -m "release v6.6.40-armv7-fpga-2"
+shell$ echo 1 > .version
 ```
 
 ### Build
@@ -71,6 +71,7 @@ shell$ make armv7_fpga_defconfig
 
 ````console
 shell$ export DTC_FLAGS=--symbols
+shell$ rm -rf debian
 shell$ make deb-pkg
 ````
 
@@ -79,16 +80,16 @@ shell$ make deb-pkg
 #### Install kernel image to this repository
 
 ```console
-shell$ cp arch/arm/boot/zImage ../vmlinuz-6.6.40-armv7-fpga-1
+shell$ cp arch/arm/boot/zImage ../vmlinuz-6.6.40-armv7-fpga-2
 shell$ install -d              ../files
-shell$ cp .config              ../files/config-6.6.40-armv7-fpga-1
+shell$ cp .config              ../files/config-6.6.40-armv7-fpga-2
 ```
 
 #### Install devicetree to this repository
 
 ```console
-shell$ install -d                           ../devicetrees/6.6.40-armv7-fpga-1
-shell$ cp arch/arm/boot/dts/xilinx/*        ../devicetrees/6.6.40-armv7-fpga-1
-shell$ cp arch/arm/boot/dts/intel/socfpga/* ../devicetrees/6.6.40-armv7-fpga-1
+shell$ install -d                           ../devicetrees/6.6.40-armv7-fpga-2
+shell$ cp arch/arm/boot/dts/xilinx/*        ../devicetrees/6.6.40-armv7-fpga-2
+shell$ cp arch/arm/boot/dts/intel/socfpga/* ../devicetrees/6.6.40-armv7-fpga-2
 ```
 
