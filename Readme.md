@@ -49,5 +49,5 @@ Files
 Build
 ------------------------------------------------------------------------------------
 
-* [./doc/build/linux-6.6.40-armv7-fpga.md](./doc/build/linux-6.6.40-armv7-fpga.md)
+* [./doc/build/linux-kernel-6.6.40-armv7-fpga.md](./doc/build/linux-kernel-6.6.40-armv7-fpga.md)
 
