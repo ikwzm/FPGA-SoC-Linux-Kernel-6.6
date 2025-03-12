@@ -15,7 +15,7 @@ This Repository provides a Linux Kernel (v6.6.40) Image and Device Trees for FPG
 
 **Downloading the entire repository takes time, so download the files from URL**   
 
-https://github.com/ikwzm/FPGA-SoC-Linux-Kernel-6.6/releases/6.6.40-armv7-fpga-1
+https://github.com/ikwzm/FPGA-SoC-Linux-Kernel-6.6/releases/6.6.40-armv7-fpga-2
 
 ### Features
 
@@ -36,17 +36,18 @@ https://github.com/ikwzm/FPGA-SoC-Linux-Kernel-6.6/releases/6.6.40-armv7-fpga-1
 Files
 ------------------------------------------------------------------------------------
 
-* vmlinuz-6.6.40-armv7-fpga-1
-* linux-headers-6.6.40-armv7-fpga_6.6.40-armv7-fpga-1_armhf.deb
-* linux-image-6.6.40-armv7-fpga_6.6.40-armv7-fpga-1_armhf.deb
-* ./devicetrees/6.6.40-armv7-fpga-1/
+* vmlinuz-6.6.40-armv7-fpga-2
+* linux-image-6.6.40-armv7-fpga_6.6.40-armv7-fpga-2_armhf.deb
+* linux-headers-6.6.40-armv7-fpga_6.6.40-armv7-fpga-2_armhf.deb
+* ./devicetrees/6.6.40-armv7-fpga-2
   + socfpga_cyclone5_de0_nano_soc.dtb
   + zynq-pynqz1.dtb
   + zynq-zybo-z7.dtb
   + zynq-zybo.dtb
-* [./files/config-6.6.40-armv7-fpga-1](./files/config-6.6.40-armv7-fpga-1)
+* [./files/config-6.6.40-armv7-fpga-2](./files/config-6.6.40-armv7-fpga-2)
 
 Build
 ------------------------------------------------------------------------------------
 
-* [./doc/build/linux-kernel-6.6.40-armv7-fpga.md](./doc/build/linux-kernel-6.6.40-armv7-fpga.md)
+* [./doc/build/linux-6.6.40-armv7-fpga.md](./doc/build/linux-6.6.40-armv7-fpga.md)
+
